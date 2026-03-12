@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product - TSAS Warehouse Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container">
+        <h1 class="page-title">Add Product</h1>
+        <p class="subtitle">Use this form to add a new product.</p>
+
+        <form>
+            <div class="form-group">
+                <label for="name">Product Name</label>
+                <input type="text" id="name" name="name">
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <select id="brand" name="brand">
+                    <option>Select a brand</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location">
+            </div>
+
+            <button type="submit" class="btn">Save Product</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+
+<h1 class="page-title">Products</h1>
+<p class="subtitle">Technology products currently stored in the warehouse.</p>
+
+<a th:href="@{/products/new}" class="btn">Add Product</a>
+
+<table class="table">
+
+<thead>
+<tr>
+<th>Product</th>
+<th>Brand</th>
+<th>Price</th>
+<th>Description</th>
+<th>Stock</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Apple Magic Mouse</td>
+<td>Apple</td>
+<td>$79.99</td>
+<td>Wireless multi-touch mouse</td>
+<td>32</td>
+</tr>
+
+<tr>
+<td>Samsung Galaxy Tab S9</td>
+<td>Samsung</td>
+<td>$699.99</td>
+<td>High performance Android tablet</td>
+<td>12</td>
+</tr>
+
+<tr>
+<td>Sony WH-1000XM5 Headphones</td>
+<td>Sony</td>
+<td>$349.99</td>
+<td>Premium noise cancelling headphones</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td>Dell 24-inch Monitor</td>
+<td>Dell</td>
+<td>$189.99</td>
+<td>HD display monitor</td>
+<td>15</td>
+</tr>
+
+<tr>
+<td>HP Wireless Keyboard</td>
+<td>HP</td>
+<td>$59.99</td>
+<td>Compact wireless keyboard</td>
+<td>40</td>
+</tr>
+
+<tr>
+<td>Logitech MX Master 3 Mouse</td>
+<td>Logitech</td>
+<td>$99.99</td>
+<td>Advanced ergonomic wireless mouse</td>
+<td>22</td>
+</tr>
+
+<tr>
+<td>JBL Bluetooth Speaker</td>
+<td>JBL</td>
+<td>$129.99</td>
+<td>Portable waterproof speaker</td>
+<td>18</td>
+</tr>
+
+<tr>
+<td>Canon Ink Cartridge</td>
+<td>Canon</td>
+<td>$39.99</td>
+<td>Standard printer ink cartridge</td>
+<td>60</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</body>
+</html>
