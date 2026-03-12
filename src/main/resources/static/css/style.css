@@ -1,0 +1,171 @@
+/* Page background and default font */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+
+/* Navigation bar */
+
+.navbar {
+    background-color: #1f2937;
+    padding: 15px 30px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* Main content container */
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 8px;
+}
+
+
+/* Page headings */
+
+.page-title {
+    margin-top: 0;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+
+/* Hero section on home page */
+
+.hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/* Cards on home page */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+
+/* Buttons */
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* Tables */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+.table th {
+    background-color: #f1f5f9;
+    text-align: left;
+}
+
+
+/* Forms */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 50px 20px;
+    border-radius: 8px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+.hero p {
+    margin-top: 10px;
+    font-size: 16px;
+    opacity: 0.9;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Brands</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <h1 class="page-title">Brands</h1>
+    <p class="subtitle">Popular technology brands currently included in the warehouse system.</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Brand ID</th>
+                <th>Brand Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Apple</td></tr>
+            <tr><td>2</td><td>Samsung</td></tr>
+            <tr><td>3</td><td>Sony</td></tr>
+            <tr><td>4</td><td>Dell</td></tr>
+            <tr><td>5</td><td>HP</td></tr>
+            <tr><td>6</td><td>Logitech</td></tr>
+            <tr><td>7</td><td>JBL</td></tr>
+            <tr><td>8</td><td>Canon</td></tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>TSAS Warehouse Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+
+    <div class="hero">
+    <h1>TSAS Warehouse Manager</h1>
+    <p>
+        A warehouse management system designed to organize products, brands,
+        inventory, and staff orders efficiently.
+    </p>
+</div>
+
+    <div class="card-grid">
+
+        <div class="card">
+            <h3>Products</h3>
+            <p>Browse and manage technology products stored in the warehouse.</p>
+            <a th:href="@{/products}" class="btn">View Products</a>
+        </div>
+
+        <div class="card">
+            <h3>Brands</h3>
+            <p>View all product brands used in the warehouse inventory.</p>
+            <a th:href="@{/brands}" class="btn">View Brands</a>
+        </div>
+
+        <div class="card">
+            <h3>Orders</h3>
+            <p>Create and review orders containing multiple products.</p>
+            <a th:href="@{/orders}" class="btn">View Orders</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>About</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+
+    <h1 class="page-title">About This Project</h1>
+
+    <p class="subtitle">
+        TSAS Warehouse Manager is a warehouse management system created for our Web Application Development course.
+    </p>
+
+    <p>
+        The purpose of this project is to build a structured system that helps manage products, brands, inventory, and orders in a warehouse environment. The system allows staff members to view products and create orders, while administrators have more control over managing the system.
+    </p>
+
+    <p>
+        Our application is built around several main entities: User, Brand, Product, Inventory, Order, and OrderItem. Each product belongs to a brand, and every product has an inventory record that tracks its quantity and storage location. Orders are created by users and can include multiple products.
+    </p>
+
+    <p>
+        The system also uses role-based access control. Administrators can create brands, add products, update inventory, view all orders, and delete products when necessary. Staff users can view products, create orders, and view the orders they have created.
+    </p>
+
+    <p>
+        For the user interface, our group designed a simple and clean layout using Spring Boot and Thymeleaf templates. The application includes pages such as the home page, product management page, order page, and login page.
+    </p>
+
+</div>
+
+</body>
+</html>
