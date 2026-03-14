@@ -33,10 +33,11 @@
     </scm>
 
     <properties>
-        <java.version>25</java.version>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
-    </properties>
+    <!-- Updated project to Java 25 -->
+    <java.version>25</java.version>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
+</properties>
 
     <dependencies>
         <dependency>
