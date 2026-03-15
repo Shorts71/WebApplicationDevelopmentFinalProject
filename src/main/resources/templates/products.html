@@ -12,92 +12,52 @@
 
 <div class="container">
 
-<h1 class="page-title">Products</h1>
-<p class="subtitle">Technology products currently stored in the warehouse.</p>
+    <h1 class="page-title">Products</h1>
+    <p class="subtitle">View all products currently stored in the warehouse system.</p>
 
-<a th:href="@{/products/new}" class="btn">Add Product</a>
+    <a th:href="@{/products/new}" class="btn">Add Product</a>
 
-<table class="table">
+    <table class="table">
 
-<thead>
-<tr>
-<th>Product</th>
-<th>Brand</th>
-<th>Price</th>
-<th>Description</th>
-<th>Stock</th>
-</tr>
-</thead>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
 
-<tbody>
+        <tbody>
 
-<tr>
-<td>Apple Magic Mouse</td>
-<td>Apple</td>
-<td>$79.99</td>
-<td>Wireless multi-touch mouse</td>
-<td>32</td>
-</tr>
+            <!-- Dynamic product rows -->
+            <tr th:each="product : ${products}">
 
-<tr>
-<td>Samsung Galaxy Tab S9</td>
-<td>Samsung</td>
-<td>$699.99</td>
-<td>High performance Android tablet</td>
-<td>12</td>
-</tr>
+                <td th:text="${product.name}">Product Name</td>
 
-<tr>
-<td>Sony WH-1000XM5 Headphones</td>
-<td>Sony</td>
-<td>$349.99</td>
-<td>Premium noise cancelling headphones</td>
-<td>20</td>
-</tr>
+                <td th:text="${product.brand != null ? product.brand.brandName : 'N/A'}">
+                    Brand Name
+                </td>
 
-<tr>
-<td>Dell 24-inch Monitor</td>
-<td>Dell</td>
-<td>$189.99</td>
-<td>HD display monitor</td>
-<td>15</td>
-</tr>
+                <td th:text="'$' + ${product.price}">$0.00</td>
 
-<tr>
-<td>HP Wireless Keyboard</td>
-<td>HP</td>
-<td>$59.99</td>
-<td>Compact wireless keyboard</td>
-<td>40</td>
-</tr>
+                <td th:text="${product.description}">Description</td>
 
-<tr>
-<td>Logitech MX Master 3 Mouse</td>
-<td>Logitech</td>
-<td>$99.99</td>
-<td>Advanced ergonomic wireless mouse</td>
-<td>22</td>
-</tr>
+                <td th:text="${product.inventory != null ? product.inventory.quantity : 0}">
+                    0
+                </td>
 
-<tr>
-<td>JBL Bluetooth Speaker</td>
-<td>JBL</td>
-<td>$129.99</td>
-<td>Portable waterproof speaker</td>
-<td>18</td>
-</tr>
+            </tr>
 
-<tr>
-<td>Canon Ink Cartridge</td>
-<td>Canon</td>
-<td>$39.99</td>
-<td>Standard printer ink cartridge</td>
-<td>60</td>
-</tr>
+            <!-- Message when there are no products -->
+            <tr th:if="${#lists.isEmpty(products)}">
+                <td colspan="5">No products found.</td>
+            </tr>
 
-</tbody>
+        </tbody>
 
-</table>
+    </table>
 
 </div>
 

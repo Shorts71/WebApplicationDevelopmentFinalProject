@@ -9,27 +9,42 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
+
     <h1 class="page-title">Brands</h1>
     <p class="subtitle">Popular technology brands currently included in the warehouse system.</p>
 
+    <!-- Add Brand button -->
+    <a th:href="@{/brands/new}" class="btn">Add Brand</a>
+
     <table class="table">
+
         <thead>
             <tr>
                 <th>Brand ID</th>
                 <th>Brand Name</th>
             </tr>
         </thead>
+
         <tbody>
-            <tr><td>1</td><td>Apple</td></tr>
-            <tr><td>2</td><td>Samsung</td></tr>
-            <tr><td>3</td><td>Sony</td></tr>
-            <tr><td>4</td><td>Dell</td></tr>
-            <tr><td>5</td><td>HP</td></tr>
-            <tr><td>6</td><td>Logitech</td></tr>
-            <tr><td>7</td><td>JBL</td></tr>
-            <tr><td>8</td><td>Canon</td></tr>
+
+            <!-- Dynamic brand rows -->
+            <tr th:each="brand : ${brands}">
+
+                <td th:text="${brand.id}">1</td>
+
+                <td th:text="${brand.brandName}">Brand Name</td>
+
+            </tr>
+
+            <!-- Message if there are no brands -->
+            <tr th:if="${#lists.isEmpty(brands)}">
+                <td colspan="2">No brands found.</td>
+            </tr>
+
         </tbody>
+
     </table>
+
 </div>
 
 </body>

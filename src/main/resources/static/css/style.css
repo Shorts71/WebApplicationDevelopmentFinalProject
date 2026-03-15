@@ -1,14 +1,9 @@
-/* Page background and default font */
-
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f4f6f9;
     color: #333;
 }
-
-
-/* Navigation bar */
 
 .navbar {
     background-color: #1f2937;
@@ -41,40 +36,58 @@ body {
     text-decoration: underline;
 }
 
-
-/* Main content container */
-
 .container {
-    max-width: 1100px;
-    margin: 40px auto;
+    max-width: 1000px;
+    margin: 50px auto;
     background: white;
-    padding: 35px;
-    border-radius: 8px;
+    padding: 45px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
-
-
-/* Page headings */
 
 .page-title {
     margin-top: 0;
-    font-size: 28px;
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
 .subtitle {
-    color: #666;
-    margin-bottom: 25px;
+    color: #6b7280;
+    font-size: 16px;
+    margin-bottom: 28px;
 }
 
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
 
-/* Hero section on home page */
+.container p {
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
 
 .hero {
     text-align: center;
     margin-bottom: 30px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 50px 20px;
+    border-radius: 8px;
 }
 
+.hero h1 {
+    margin: 0;
+    font-size: 36px;
+}
 
-/* Cards on home page */
+.hero p {
+    margin-top: 10px;
+    font-size: 16px;
+    opacity: 0.9;
+}
 
 .card-grid {
     display: grid;
@@ -93,9 +106,6 @@ body {
     margin-top: 0;
 }
 
-
-/* Buttons */
-
 .btn {
     display: inline-block;
     margin-top: 10px;
@@ -109,9 +119,6 @@ body {
 .btn:hover {
     background-color: #1d4ed8;
 }
-
-
-/* Tables */
 
 .table {
     width: 100%;
@@ -130,9 +137,6 @@ body {
     text-align: left;
 }
 
-
-/* Forms */
-
 .form-group {
     margin-bottom: 18px;
 }
@@ -150,22 +154,4 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-.hero {
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: white;
-    padding: 50px 20px;
-    border-radius: 8px;
-}
-
-.hero h1 {
-    margin: 0;
-    font-size: 36px;
-}
-
-.hero p {
-    margin-top: 10px;
-    font-size: 16px;
-    opacity: 0.9;
 }

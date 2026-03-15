@@ -9,12 +9,14 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
+
     <h1 class="page-title">Orders</h1>
     <p class="subtitle">Orders created by staff in the warehouse system.</p>
 
     <a th:href="@{/orders/new}" class="btn">Create Order</a>
 
     <table class="table">
+
         <thead>
             <tr>
                 <th>Order ID</th>
@@ -23,27 +25,33 @@
                 <th>Total Amount</th>
             </tr>
         </thead>
+
         <tbody>
-            <tr>
-                <td>1001</td>
-                <td>staff01</td>
-                <td>2026-03-11</td>
-                <td>$859.97</td>
+
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.user}"></td>
+                <td th:text="${order.orderDate}"></td>
+                <td th:text="'$' + ${order.totalAmount}"></td>
             </tr>
-            <tr>
-                <td>1002</td>
-                <td>staff02</td>
-                <td>2026-03-10</td>
-                <td>$249.99</td>
+
+            <tr th:if="${#lists.isEmpty(orders)}">
+                <td colspan="4">No orders found.</td>
             </tr>
-            <tr>
-                <td>1003</td>
-                <td>staff03</td>
-                <td>2026-03-09</td>
-                <td>$129.99</td>
-            </tr>
+
         </tbody>
+
     </table>
+
+</div>
+
+</body>
+</html>
+
+        </tbody>
+
+    </table>
+
 </div>
 
 </body>
