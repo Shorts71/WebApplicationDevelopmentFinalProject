@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Brand</title>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Add Brand</h1>
+
+<form th:action="@{/brands/save}" th:object="${brand}" method="post">
+
+    <label>Brand Name</label>
+    <input type="text" th:field="*{brandName}" required>
+
+    <button type="submit">Save</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

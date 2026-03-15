@@ -1,87 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Product - TSAS Warehouse Manager</title>
+
+    <title>Add Product</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
+
 <body>
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
 
-    <h1 class="page-title">Add Product</h1>
-    <p class="subtitle">Use this form to add a new product.</p>
+<h1 class="page-title">Add Product</h1>
 
-    <!-- Thymeleaf form -->
-    <form th:action="@{/products/save}" method="post" th:object="${product}">
+<p class="subtitle">Use this form to add a new product.</p>
 
-        <div class="form-group">
-            <label for="name">Product Name</label>
-            <input type="text"
-                   id="name"
-                   class="form-control"
-                   th:field="*{name}">
-        </div>
+<form th:action="@{/products/save}" method="post" th:object="${product}">
 
-        <div class="form-group">
-            <label for="brand">Brand</label>
+<div class="form-group">
 
-            <select id="brand"
-                    class="form-control"
-                    th:field="*{brand.id}">
+<label>Name</label>
 
-                <option value="">Select a brand</option>
+<input type="text"
+       class="form-control"
+       th:field="*{name}"
+       required>
 
-                <option th:each="brand : ${brands}"
-                        th:value="${brand.id}"
-                        th:text="${brand.brandName}">
-                </option>
+</div>
 
-            </select>
-        </div>
+<div class="form-group">
 
-        <div class="form-group">
-            <label for="price">Price</label>
+<label>Price</label>
 
-            <input type="number"
-                   id="price"
-                   class="form-control"
-                   step="0.01"
-                   th:field="*{price}">
-        </div>
+<input type="number"
+       class="form-control"
+       th:field="*{price}"
+       required>
 
-        <div class="form-group">
-            <label for="description">Description</label>
+</div>
 
-            <textarea id="description"
-                      class="form-control"
-                      rows="4"
-                      th:field="*{description}">
-            </textarea>
-        </div>
+<div class="form-group">
 
-        <div class="form-group">
-            <label for="quantity">Quantity</label>
+<label>Description</label>
 
-            <input type="number"
-                   id="quantity"
-                   class="form-control"
-                   th:field="*{inventory.quantity}">
-        </div>
+<textarea class="form-control"
+          th:field="*{description}">
+</textarea>
 
-        <div class="form-group">
-            <label for="location">Location</label>
+</div>
 
-            <input type="text"
-                   id="location"
-                   class="form-control"
-                   th:field="*{inventory.location}">
-        </div>
+<div class="form-group">
 
-        <button type="submit" class="btn">Save Product</button>
+<label>Brand</label>
 
-    </form>
+<select class="form-control"
+        th:field="*{brand.id}"
+        required>
+
+<option value="">Select Brand</option>
+
+<option th:each="brand : ${brands}"
+        th:value="${brand.id}"
+        th:text="${brand.brandName}">
+</option>
+
+</select>
+
+</div>
+
+<button type="submit" class="btn-primary">
+
+Save Product
+
+</button>
+
+</form>
 
 </div>
 
