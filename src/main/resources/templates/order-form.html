@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Create Order - TSAS Warehouse Manager</title>
+
+    <title>Create Order</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
 </head>
+
 <body>
 
-<div th:replace="fragments/navbar :: navbar"></div>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div class="container">
 
-    <h1 class="page-title">Create Order</h1>
-    <p class="subtitle">Use this form to create a new order.</p>
+<h1>Create Order</h1>
 
-    <!-- Thymeleaf form -->
-    <form th:action="@{/orders/save}" method="post" th:object="${order}">
+<form th:action="@{/orders/save}" method="post">
 
-        <div class="form-group">
-            <label for="product">Select Product</label>
+<div class="form-group">
 
-            <select id="product"
-                    class="form-control"
-                    th:field="*{product.id}">
+<label>Select Product</label>
 
-                <option value="">Select a product</option>
+<select name="productId" required>
 
-                <option th:each="product : ${products}"
-                        th:value="${product.id}"
-                        th:text="${product.name}">
-                </option>
+<option value="">Select Product</option>
 
-            </select>
+<option th:each="product : ${products}"
+        th:value="${product.id}"
+        th:text="${product.name}">
+</option>
 
-        </div>
+</select>
 
-        <div class="form-group">
-            <label for="quantity">Quantity</label>
+</div>
 
-            <input type="number"
-                   id="quantity"
-                   class="form-control"
-                   th:field="*{quantity}">
-        </div>
+<br>
 
-        <button type="submit" class="btn">Add to Order</button>
+<div class="form-group">
 
-    </form>
+<label>Quantity</label>
+
+<input type="number"
+       name="quantity"
+       min="1"
+       required>
+
+</div>
+
+<br>
+
+<button type="submit" class="btn">
+
+Create Order
+
+</button>
+
+</form>
 
 </div>
 
