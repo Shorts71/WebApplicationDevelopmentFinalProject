@@ -5,61 +5,41 @@
     <title>Products</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
-
 <div th:replace="fragments/navbar :: navbar"></div>
-
 <div class="container">
-
     <h1 class="page-title">Products</h1>
     <p class="subtitle">View all products currently stored in the warehouse system.</p>
-
     <a th:href="@{/products/new}" class="btn">Add Product</a>
-
     <table class="table">
-
         <thead>
-            <tr>
-                <th>Product</th>
-                <th>Brand</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Stock</th>
-            </tr>
+        <tr>
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock</th>
+        </tr>
         </thead>
-
         <tbody>
-
-            <!-- Dynamic product rows -->
-            <tr th:each="product : ${products}">
-
-                <td th:text="${product.name}">Product Name</td>
-
-                <td th:text="${product.brand != null ? product.brand.brandName : 'N/A'}">
-                    Brand Name
-                </td>
-
-                <td th:text="'$' + ${product.price}">$0.00</td>
-
-                <td th:text="${product.description}">Description</td>
-
-                <td th:text="${product.inventory != null ? product.inventory.quantity : 0}">
-                    0
-                </td>
-
-            </tr>
-
-            <!-- Message when there are no products -->
-            <tr th:if="${#lists.isEmpty(products)}">
-                <td colspan="5">No products found.</td>
-            </tr>
-
+        <!-- Dynamic product rows -->
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}">Product Name</td>
+            <td th:text="${product.brand != null ? product.brand.brandName : 'N/A'}">
+                Brand Name
+            </td>
+            <td th:text="'$' + ${product.price}">$0.00</td>
+            <td th:text="${product.description}">Description</td>
+            <td th:text="${product.stockCount != null ? product.stockCount : 0}">
+                0
+            </td>
+        </tr>
+        <!-- Message when there are no products -->
+        <tr th:if="${#lists.isEmpty(products)}">
+            <td colspan="5">No products found.</td>
+        </tr>
         </tbody>
-
     </table>
-
 </div>
-
 </body>
 </html>

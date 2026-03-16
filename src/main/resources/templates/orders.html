@@ -5,56 +5,39 @@
     <title>Orders</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-
 <body>
-
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-
 <div class="container">
+    <h1 class="page-title">Orders</h1>
+    <p class="subtitle">Orders which have been requested by various clients/staff members.</p>
+    <a th:href="@{/orders/new}" class="btn">
+        Create New Order
+    </a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Amount</th>
+            <th>Order Date</th>
+        </tr>
+        </thead>
 
-<h1>Orders</h1>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.items[0].product.name}"></td>
+            <td th:text="${order.quantity}"></td>
+            <td th:text="'$' + ${#numbers.formatDecimal(order.totalAmount, 1, 2)}"></td>
+            <td th:text="${#temporals.format(order.orderDate, 'MMM dd, yyyy HH:mm')}"></td>
+        </tr>
 
-<a href="/orders/new">
-    <button>Create New Order</button>
-</a>
-
-<br><br>
-
-<table border="1">
-
-<thead>
-
-<tr>
-    <th>ID</th>
-    <th>Product</th>
-    <th>Quantity</th>
-    <th>Total Amount</th>
-    <th>Order Date</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr th:each="order : ${orders}">
-
-<td th:text="${order.id}"></td>
-
-<td th:text="${order.items[0].product.name}"></td>
-
-<td th:text="${order.quantity}"></td>
-
-<td th:text="${order.totalAmount}"></td>
-
-<td th:text="${order.orderDate}"></td>
-
-</tr>
-
-</tbody>
-
-</table>
-
+        <tr th:if="${#lists.isEmpty(orders)}">
+            <td colspan="5">No orders found.</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
 </body>
 </html>

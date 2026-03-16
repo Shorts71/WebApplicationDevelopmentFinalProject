@@ -5,47 +5,33 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
 <div th:replace="fragments/navbar :: navbar"></div>
-
 <div class="container">
-
     <h1 class="page-title">Brands</h1>
     <p class="subtitle">Popular technology brands currently included in the warehouse system.</p>
-
     <!-- Add Brand button -->
     <a th:href="@{/brands/new}" class="btn">Add Brand</a>
-
     <table class="table">
-
         <thead>
-            <tr>
-                <th>Brand ID</th>
-                <th>Brand Name</th>
-            </tr>
+        <tr>
+            <th>Brand ID</th>
+            <th>Brand Name</th>
+        </tr>
         </thead>
 
         <tbody>
+        <!-- Dynamic brand rows -->
+        <tr th:each="brand : ${brands}">
+            <td th:text="${brand.id}">1</td>
+            <td th:text="${brand.brandName}">Brand Name</td>
+        </tr>
 
-            <!-- Dynamic brand rows -->
-            <tr th:each="brand : ${brands}">
-
-                <td th:text="${brand.id}">1</td>
-
-                <td th:text="${brand.brandName}">Brand Name</td>
-
-            </tr>
-
-            <!-- Message if there are no brands -->
-            <tr th:if="${#lists.isEmpty(brands)}">
-                <td colspan="2">No brands found.</td>
-            </tr>
-
+        <!-- Message if there are no brands -->
+        <tr th:if="${#lists.isEmpty(brands)}">
+            <td colspan="2">No brands found.</td>
+        </tr>
         </tbody>
-
     </table>
-
 </div>
-
 </body>
 </html>
