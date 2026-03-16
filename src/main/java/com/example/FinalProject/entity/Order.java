@@ -1,12 +1,18 @@
 package com.example.FinalProject.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "orders_table")
+@Data
+@AllArgsConstructor
 public class Order {
 
     @Id
@@ -15,14 +21,17 @@ public class Order {
 
     private int quantity;
 
+    @Column(name = "total_amount")
     private double totalAmount;
 
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items = new ArrayList<>();
 
-    public Order() {}
+    public Order() {
+    }
 
     public Long getId() {
         return id;

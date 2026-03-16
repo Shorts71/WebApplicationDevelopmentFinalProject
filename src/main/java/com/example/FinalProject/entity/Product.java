@@ -1,8 +1,14 @@
 package com.example.FinalProject.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "products")
+@Data
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -11,9 +17,11 @@ public class Product {
     private String name;
     private Double price;
     private String description;
+    @Column(name = "stock_count")
     private int stockCount;
 
     @ManyToOne
+    @JoinColumn(name = "brand_id")
     private Brand brand;
     @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
