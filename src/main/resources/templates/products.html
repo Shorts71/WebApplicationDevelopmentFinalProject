@@ -1,45 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>Products</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <body>
+
 <div th:replace="fragments/navbar :: navbar"></div>
-<div class="container">
-    <h1 class="page-title">Products</h1>
-    <p class="subtitle">View all products currently stored in the warehouse system.</p>
-    <a th:href="@{/products/new}" class="btn">Add Product</a>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Product</th>
-            <th>Brand</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Stock</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Dynamic product rows -->
-        <tr th:each="product : ${products}">
-            <td th:text="${product.name}">Product Name</td>
-            <td th:text="${product.brand != null ? product.brand.brandName : 'N/A'}">
-                Brand Name
-            </td>
-            <td th:text="'$' + ${product.price}">$0.00</td>
-            <td th:text="${product.description}">Description</td>
-            <td th:text="${product.stockCount != null ? product.stockCount : 0}">
-                0
-            </td>
-        </tr>
-        <!-- Message when there are no products -->
-        <tr th:if="${#lists.isEmpty(products)}">
-            <td colspan="5">No products found.</td>
-        </tr>
-        </tbody>
-    </table>
+
+<div class="container mt-4">
+
+    <h1 class="mb-3">Products</h1>
+    <p class="text-muted mb-3">View all products currently stored in the warehouse system.</p>
+
+    <a th:href="@{/products/new}" class="btn btn-success mb-3">Add Product</a>
+
+    <div class="table-responsive">
+        <table id="productsTable" class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Stock</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.brand != null ? product.brand.brandName : 'N/A'}"></td>
+                <td th:text="'$' + ${product.price}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.stockCount}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
+
+<!-- JS: at the bottom -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('#productsTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true
+    });
+});
+</script>
+
 </body>
 </html>
