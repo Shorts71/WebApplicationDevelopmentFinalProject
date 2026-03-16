@@ -2,52 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Brands</title>
-
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <body>
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container mt-4">
-
     <h1 class="mb-3">Brands</h1>
-    <p class="text-muted mb-3">Popular brands included in the warehouse system.</p>
+    <p class="text-muted mb-3">Popular technology brands currently included in the warehouse system.</p>
 
     <a th:href="@{/brands/new}" class="btn btn-success mb-3">Add Brand</a>
 
-    <div class="table-responsive">
-        <table id="brandsTable" class="table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>Brand ID</th>
-                <th>Brand Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="brand : ${brands}">
-                <td th:text="${brand.id}"></td>
-                <td th:text="${brand.brandName}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- Filter -->
+    <form method="get" th:action="@{/brands}" class="row g-3 mb-3">
+        <div class="col-md-3">
+            <input type="text" name="brand" th:value="${brandFilter}" class="form-control" placeholder="Search Brand Name">
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a th:href="@{/brands}" class="btn btn-secondary">Reset</a>
+        </div>
+    </form>
 
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <a th:href="@{/brands(page=${currentPage},size=10,sortField='id',sortDir=${sortField=='id' && sortDir=='asc'?'desc':'asc'},brand=${brandFilter})}">
+                    ID <span th:text="${sortField=='id'? (sortDir=='asc'?'↑':'↓') : ''}"></span>
+                </a>
+            </th>
+            <th>
+                <a th:href="@{/brands(page=${currentPage},size=10,sortField='brandName',sortDir=${sortField=='brandName' && sortDir=='asc'?'desc':'asc'},brand=${brandFilter})}">
+                    Brand <span th:text="${sortField=='brandName'? (sortDir=='asc'?'↑':'↓') : ''}"></span>
+                </a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="brand : ${brandPage.getContent()}">
+            <td th:text="${brand.id}"></td>
+            <td th:text="${brand.brandName}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav th:if="${totalPages > 1}">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${currentPage==0}? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/brands(page=${currentPage-1},size=10,sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}">Previous</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0,totalPages-1)}" th:classappend="${i==currentPage}? 'active'">
+                <a class="page-link"
+                   th:href="@{/brands(page=${i},size=10,sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}"
+                   th:text="${i+1}"></a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage+1>=totalPages}? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/brands(page=${currentPage+1},size=10,sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script>
-$(document).ready(function () {
-    $('#brandsTable').DataTable({
-        paging: true,
-        searching: true,
-        ordering: true
-    });
-});
-</script>
-
 </body>
 </html>
