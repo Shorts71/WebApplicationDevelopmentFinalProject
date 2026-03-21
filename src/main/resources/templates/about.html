@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <meta charset="UTF-8">
     <title>About</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <div th:insert="fragments/base :: assetsHead"></div>
 </head>
 
 <body>
 
-<div th:replace="fragments/navbar :: navbar"></div>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container">
 
@@ -19,19 +20,26 @@
     </p>
 
     <p>
-        The purpose of this project is to build a structured system that helps manage products, brands, inventory, and orders in a warehouse environment. The system allows staff members to view products and create orders, while administrators have more control over managing the system.
+        The purpose of this project is to build a structured system that helps manage products, brands, inventory, and
+        orders in a warehouse environment. The system allows staff members to view products and create orders, while
+        administrators have more control over managing the system.
     </p>
 
     <p>
-        Our application is built around several main entities: User, Brand, Product, Inventory, Order, and OrderItem. Each product belongs to a brand, and every product has an inventory record that tracks its quantity and storage location. Orders are created by users and can include multiple products.
+        Our application is built around several main entities: User, Brand, Product, Inventory, Order, and OrderItem.
+        Each product belongs to a brand, and every product has an inventory record that tracks its quantity and storage
+        location. Orders are created by users and can include multiple products.
     </p>
 
     <p>
-        The system also uses role-based access control. Administrators can create brands, add products, update inventory, view all orders, and delete products when necessary. Staff users can view products, create orders, and view the orders they have created.
+        The system also uses role-based access control. Administrators can create brands, add products, update
+        inventory, view all orders, and delete products when necessary. Staff users can view products, create orders,
+        and view the orders they have created.
     </p>
 
     <p>
-        For the user interface, our group designed a simple and clean layout using Spring Boot and Thymeleaf templates. The application includes pages such as the home page, product management page, order page, and login page.
+        For the user interface, our group designed a simple and clean layout using Spring Boot and Thymeleaf templates.
+        The application includes pages such as the home page, product management page, order page, and login page.
     </p>
 
 </div>

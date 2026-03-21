@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>TSAS Warehouse Manager</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <div th:insert="fragments/base :: assetsHead"></div>
 </head>
 
 <body>
 
-<div th:replace="fragments/navbar :: navbar"></div>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 
 <div class="container">
 

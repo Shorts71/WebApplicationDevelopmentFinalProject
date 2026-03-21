@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Add Brand</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <div th:insert="fragments/base :: assetsHead"></div>
 </head>
-    <body>
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
-        <div class="container">
-        <h1>Add Brand</h1>
-        <form th:action="@{/brands/save}" th:object="${brand}" method="post">
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container">
+    <h1>Add Brand</h1>
+    <form th:action="@{/brands/save}" th:object="${brand}" method="post">
         <div class="form-group">
             <label>Brand Name</label>
             <input type="text" th:field="*{brandName}" required>
         </div>
         <button type="submit" class="btn">Save</button>
-        </form>
-        </div>
-    </body>
+    </form>
+</div>
+</body>
 </html>
