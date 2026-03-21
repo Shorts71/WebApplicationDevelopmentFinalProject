@@ -1,6 +1,7 @@
 package com.example.FinalProject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,82 +10,37 @@ import lombok.NoArgsConstructor;
 @Table(name = "products")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Size(min = 3, max = 50, message = "Name must be longer than 3 characters and shorter than 50 characters.")
+    @NotBlank(message = "Product name is required.")
+    @Column(nullable = false, unique = true)
     private String name;
+
+    @NotNull(message = "Price is required.")
+    @Min(value = 1, message = "Price must be greater than 0.")
+    @Max(value = 999999999, message = "Price must be less than 1 billion.")
     private Double price;
+
+    @NotNull(message = "Description is required.")
+    @Size(min = 0, max = 400, message = "Description is too long.")
     private String description;
+
+    @Min(value = 1, message = "Stock count must be greater than 0.")
+    @Max(value = 999999999, message = "Stock count must be less than 1 billion.")
     @Column(name = "stock_count")
     private int stockCount;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
-
-    public Product() {
-        this.inventory = new Inventory();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
-    public int getStockCount() {
-        return stockCount;
-    }
-
-    public void setStockCount(int stockCount) {
-        this.stockCount = stockCount;
-    }
-
 
 }
