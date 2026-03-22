@@ -10,24 +10,33 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container">
     <h1>Create Order</h1>
-    <form th:action="@{/orders/save}" method="post">
-        <div class="form-group">
+    <p class="text-muted mb-4">Create orders with this form.</p>
+    <form th:action="@{/orders/save}" th:object="${order}" method="post" novalidate>
+        <div class="mb-3">
             <label>Select Product</label>
-            <select name="productId" required>
+            <select
+                    th:field="*{product}"
+                    class="form-select"
+                    th:classappend="${#fields.hasErrors('product') ? 'is-invalid' : '' }"
+                    required>
                 <option value="">Select Product</option>
                 <option th:each="product : ${products}"
                         th:value="${product.id}"
                         th:text="${product.name}">
                 </option>
             </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('product')}" th:errors="*{product}"></div>
         </div>
         <br>
         <div class="form-group">
             <label>Quantity</label>
             <input type="number"
-                   name="quantity"
+                   th:field="*{quantity}"
                    min="1"
+                   class="form-control"
+                   th:classappend="${#fields.hasErrors('quantity') ? 'is-invalid' : '' }"
                    required>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
         </div>
         <br>
         <button type="submit" class="btn">

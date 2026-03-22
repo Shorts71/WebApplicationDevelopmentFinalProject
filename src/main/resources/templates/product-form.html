@@ -18,32 +18,70 @@
 
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" th:field="*{name}" class="form-control" placeholder="Enter product name" required>
+            <input
+                    type="text"
+                    th:field="*{name}"
+                    class="form-control"
+                    placeholder="Enter product name"
+                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : '' }"
+                    required
+            >
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Price</label>
-            <input type="number" th:field="*{price}" class="form-control" step="0.01" placeholder="Enter price"
-                   required>
+            <input
+                    type="number"
+                    th:field="*{price}"
+                    class="form-control"
+                    step="0.01"
+                    placeholder="Enter price"
+                    th:classappend="${#fields.hasErrors('price') ? 'is-invalid' : '' }"
+                    required
+            >
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea th:field="*{description}" class="form-control" rows="3"
-                      placeholder="Enter description"></textarea>
+            <textarea
+                    th:field="*{description}"
+                    class="form-control"
+                    rows="3"
+                    placeholder="Enter description"
+                    th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : '' }"
+            >
+
+            </textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Brand</label>
-            <select th:field="*{brand.id}" class="form-select" required>
+            <select
+                    th:field="*{brand}"
+                    class="form-select"
+                    required
+                    th:classappend="${#fields.hasErrors('brand') ? 'is-invalid' : '' }"
+            >
                 <option value="">Select Brand</option>
                 <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.brandName}"></option>
             </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Stock Count</label>
-            <input type="number" th:field="*{stockCount}" class="form-control" placeholder="Enter stock count" required>
+            <input
+                    type="number"
+                    th:field="*{stockCount}"
+                    class="form-control"
+                    placeholder="Enter stock count"
+                    th:classappend="${#fields.hasErrors('stockCount') ? 'is-invalid' : '' }"
+                    required
+            >
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('stockCount')}" th:errors="*{stockCount}"></div>
         </div>
 
         <button type="submit" class="btn btn-primary">Save Product</button>
