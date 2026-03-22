@@ -1,53 +1,36 @@
-package com.example.FinalProject.entity;
-
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "order_item")
-public class OrderItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private int quantity;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    public OrderItem() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-}
+//package com.example.FinalProject.entity;
+//
+//import jakarta.persistence.*;
+//import jakarta.validation.constraints.Max;
+//import jakarta.validation.constraints.Min;
+//import jakarta.validation.constraints.NotBlank;
+//import jakarta.validation.constraints.NotNull;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//@Entity
+//@Table(name = "order_item")
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//public class OrderItem {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @NotNull(message = "Quantity is required.")
+//    @Min(value = 1, message = "Quantity must be greater than 0.")
+//    @Max(value = 999999999, message = "Quantity must be less than 1 billion.")
+//    private int quantity;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
+//
+//    @JoinColumn(name = "product_id")
+//    @NotNull(message = "Product is required.")
+//    private Product product;
+//
+//}
