@@ -1,60 +1,102 @@
 package com.example.FinalProject.controller;
 
 import com.example.FinalProject.entity.User;
+import com.example.FinalProject.repository.UserRepository;
 import com.example.FinalProject.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/users")
 public class UsersController {
     private final UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public UsersController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public String getUsers(
             Model model,
-            @RequestParam(name = "search", required = false, defaultValue = "") String search,
+            @RequestParam(name = "username", required = false, defaultValue = "") String username,
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "size", required = false, defaultValue = "10") int size,
-            @RequestParam(name = "sort", required = false, defaultValue = "userId") String sortBy,
-            @RequestParam(name = "direction", required = false, defaultValue = "ASC") String direction
+            @RequestParam(name = "sortField", required = false, defaultValue = "userId") String sortField,
+            @RequestParam(name = "sortDir", required = false, defaultValue = "ASC") String sortDir,
+            @RequestParam(name = "filterType", required = false, defaultValue = "all") String filterType
     ) {
-        Sort.Direction sortedDirection = direction.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Sort sort = Sort.by(sortedDirection, sortBy);
+        Sort.Direction sortedDirection = sortDir.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort sort = Sort.by(sortedDirection, sortField);
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<User> userPage;
 
-        if (search != null && !search.isEmpty()) {
-            userPage = userService.findUserByName(search, pageable);
+        if (username != null && !username.isEmpty()) {
+            userPage = userService.findUserByName(username, pageable);
         } else {
-            userPage = userService.getAllUsersPageable(pageable);
+            userPage = switch (filterType) {
+                case "staff" -> userService.findUserByStaffRole(pageable);
+                case "admin" -> userService.findUserByAdminRole(pageable);
+                default -> userService.getAllUsersPageable(pageable);
+            };
         }
 
-        model.addAttribute("players", userPage.getContent());
+        model.addAttribute("userPage", userPage);
+        model.addAttribute("users", userPage.getContent());
         model.addAttribute("total", userPage.getTotalElements());
         model.addAttribute("size", size);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", userPage.getTotalPages());
-        model.addAttribute("search", search);
-        model.addAttribute("sort", sortBy);
-        model.addAttribute("direction", direction);
+        model.addAttribute("search", username);
+        model.addAttribute("sort", sortField);
+        model.addAttribute("direction", sortDir);
         model.addAttribute("hasPrevious", userPage.hasPrevious());
         model.addAttribute("hasNext", userPage.hasNext());
         model.addAttribute("startIndex", page * size + 1);
         model.addAttribute("endIndex", Math.min((page + 1) * size, (int) userPage.getTotalElements()));
 
-        return "Users";
+        return "users";
+    }
+
+    @GetMapping("new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        return "user-form";
+
+    }
+
+    @PostMapping("/save")
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return "user-form";
+        }
+
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            model.addAttribute("error", "Username already exists");
+            return "user-form";
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("STAFF");
+
+        userRepository.save(user);
+        return "redirect:/users";
     }
 }
