@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <div th:insert="fragments/base :: assetsHead"></div>
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+
+<div class="container mt-4">
+    <h1 class="mb-3">Create a User</h1>
+    <p class="text-muted mb-4">Create users with this form.</p>
+
+    <form th:action="@{/users/save}" th:object="${user}" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label class="form-label" for="username">Name</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    th:field="*{username}"
+                    th:classappend="${#fields.hasErrors('username') ? 'is-invalid' : '' }"
+                    required
+            >
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+                Name Error.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    th:field="*{email}"
+                    aria-describedby="emailHelp"
+                    th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : '' }"
+                    required
+            >
+            <div id="emailHelp" class="form-text">Do not share this email with others.</div>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                Email Error.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="password"
+                    th:field="*{password}"
+                    aria-describedby="passwordHelp"
+                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : '' }"
+                    required
+            >
+            <div id="passwordHelp" class="form-text">Only show this to the user.</div>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                Password Error.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Add User</button>
+    </form>
+</div>
+</body>
+</html>
