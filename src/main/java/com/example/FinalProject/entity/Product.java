@@ -23,21 +23,23 @@ public class Product {
     private String name;
 
     @NotNull(message = "Price is required.")
-    @Min(value = 1, message = "Price must be greater than 0.")
-    @Max(value = 999999999, message = "Price must be less than 1 billion.")
+    @DecimalMin(value = "1", message = "Price must be greater than 0.")
+    @DecimalMax(value = "999999999", message = "Price must be less than 1 billion.")
     private Double price;
 
-    @NotNull(message = "Description is required.")
-    @Size(min = 0, max = 400, message = "Description is too long.")
+    @NotBlank(message = "Description is required.")
+    @Size(min = 10, max = 400, message = "Description must be between 10 and 400 characters.")
     private String description;
 
     @Min(value = 1, message = "Stock count must be greater than 0.")
     @Max(value = 999999999, message = "Stock count must be less than 1 billion.")
+    @NotNull(message = "Stock Count is required.")
     @Column(name = "stock_count")
-    private int stockCount;
+    private Integer stockCount;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
+    @NotNull(message = "Brand is required.")
     private Brand brand;
 
     @OneToOne(cascade = CascadeType.ALL)

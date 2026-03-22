@@ -1,6 +1,9 @@
 package com.example.FinalProject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,63 +16,26 @@ import java.util.List;
 @Table(name = "orders_table")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int quantity;
+    @NotNull(message = "Quantity is required.")
+    @Min(value = 1)
+    @Max(value = 999999999)
+    private Integer quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    @NotNull(message = "Product is required.")
+    private Product product;
 
     @Column(name = "total_amount")
     private double totalAmount;
 
     @Column(name = "order_date")
     private LocalDateTime orderDate;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> items = new ArrayList<>();
-
-    public Order() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public LocalDateTime getOrderDate() {
-        return orderDate;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
-    }
 }

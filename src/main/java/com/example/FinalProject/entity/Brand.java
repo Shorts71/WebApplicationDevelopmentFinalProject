@@ -1,6 +1,8 @@
 package com.example.FinalProject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,31 +11,16 @@ import lombok.NoArgsConstructor;
 @Table(name = "brands")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "brand_name")
+    @Size(min = 3, max = 50, message = "Brand name must be longer than 3 characters and shorter than 50 characters.")
+    @NotBlank(message = "Brand name is required.")
+    @Column(name = "brand_name", nullable = false, unique = true)
     private String brandName;
 
-    public Brand() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
 }
