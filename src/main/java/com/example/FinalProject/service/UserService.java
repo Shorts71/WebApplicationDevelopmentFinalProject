@@ -32,7 +32,15 @@ public class UserService {
         return userRepository.findByUsernameContainingIgnoreCase(name, pageable);
     }
 
-    public User getUserById(int id) {
+    public User getUserByUserId(int id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    public Page<User> findUserByStaffRole(Pageable pageable) {
+        return userRepository.findUserByStaffRole(pageable);
+    }
+
+    public Page<User> findUserByAdminRole(Pageable pageable) {
+        return userRepository.findUserByAdminRole(pageable);
     }
 }
