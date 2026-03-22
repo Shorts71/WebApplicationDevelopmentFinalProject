@@ -4,57 +4,194 @@
     <meta charset="UTF-8">
     <title>Orders</title>
     <div th:insert="fragments/base :: assetsHead"></div>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 <body>
-
 <nav th:replace="fragments/navbar :: navbar"></nav>
-
-<div class="container mt-4">
-
+<div class="container mt-4" style="min-width: 1600px;">
     <h1 class="mb-3">Orders</h1>
     <p class="text-muted mb-3">Orders requested by staff members.</p>
 
     <a th:href="@{/orders/new}" class="btn btn-success mb-3">Create New Order</a>
 
-    <div class="table-responsive">
-        <table id="ordersTable" class="table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total Amount</th>
-                <th>Order Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="order : ${orders}">
-                <td th:text="${order.id}"></td>
-                <td th:text="${#lists.isEmpty(order.items) ? 'N/A' : order.items[0].product.name}"></td>
-                <td th:text="${#lists.isEmpty(order.items) ? 'N/A' : order.items[0].product.price}"></td>
-                <td th:text="${order.quantity}"></td>
-                <td th:text="'$' + ${#numbers.formatDecimal(order.totalAmount,1,2)}"></td>
-                <td th:text="${#temporals.format(order.orderDate,'MMM dd, yyyy HH:mm')}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <form method="get" th:action="@{/orders}" class="row g-3 mb-3">
+
+        <!-- Search by Product Name/Product Brand -->
+        <div class="col-md-3" style="max-width: 150px;">
+            <label for="size-select" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">
+                Orders</label>
+            <input type="text" name="order" th:value="${orderFilter}" class="form-control"
+                   placeholder="Search Orders">
+        </div>
+
+        <!-- Row Count per page -->
+        <div class="col-md-3" style="max-width: 150px;">
+            <label for="size-select" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">Per
+                Page</label>
+            <select id="size-select" name="size" onchange="this.form.submit();"
+                    style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="10" th:selected="${size == 10}">10</option>
+                <option value="25" th:selected="${size == 25}">25</option>
+                <option value="50" th:selected="${size == 50}">50</option>
+                <option value="100" th:selected="${size == 100}">100</option>
+            </select>
+        </div>
+
+        <!-- Filter by Stock Count -->
+        <div class="col-md-3" style="max-width: 150px;">
+            <label for="filter-select" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">Filter
+                By</label>
+            <select id="filter-select" name="filterType" onchange="this.form.submit();"
+                    style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="all" th:selected="${filterType == 'all'}">All Orders</option>
+                <option value="low" th:selected="${filterType == 'low'}">Low Quantity Order</option>
+                <option value="average" th:selected="${filterType == 'average'}">Average Quantity Order</option>
+                <option value="high" th:selected="${filterType == 'high'}">High Quantity Order</option>
+            </select>
+        </div>
+
+        <!-- Oldest/Newest -->
+        <div class="col-md-3" style="max-width: 150px;">
+            <label for="direction-select"
+                   style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">Direction</label>
+            <select id="direction-select" name="sortDir" onchange="this.form.submit();"
+                    style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="ASC" th:selected="${sortDir == 'ASC'}">Ascending</option>
+                <option value="DESC" th:selected="${sortDir == 'DESC'}">Descending</option>
+            </select>
+        </div>
+
+        <!-- Search and Reset -->
+        <div class="col-md-3">
+            <a th:href="@{/orders}" class="btn btn-secondary">Reset Filters</a>
+        </div>
+
+    </form>
+
+    <table class="table table-striped table-bordered" style="table-layout: fixed;">
+        <thead>
+        <tr>
+            <th style="width: 10%">
+                <a th:href="@{/orders(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='order',
+                               sortDir=${sortField=='order' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               order=${orderFilter},
+                               filterType=${filterType}
+                               )}">
+                    ID
+                </a>
+                <span th:text="${sortField=='order' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
+
+            <th style="width: 10%">
+                <a th:href="@{/orders(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='order.items',
+                               sortDir=${sortField=='order.items' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               order=${orderFilter},
+                               filterType=${filterType}
+                               )}">
+                    Product
+                </a>
+                <span th:text="${sortField=='order.items' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
+
+            <th style="width: 10%">
+                <a th:href="@{/orders(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='order.product.price',
+                               sortDir=${sortField=='order.product.price' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               order=${orderFilter},
+                               filterType=${filterType}
+                               )}">
+                    Price
+                </a>
+                <span th:text="${sortField=='order.product.price' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
+
+            <th style="width: 10%">
+                <a th:href="@{/orders(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='quantity',
+                               sortDir=${sortField=='quantity' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               order=${orderFilter},
+                               filterType=${filterType}
+                               )}">
+                    Quantity
+                </a>
+                <span th:text="${sortField=='quantity' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
+
+            <th style="width: 10%">
+                <a th:href="@{/orders(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='order.totalAmount',
+                               sortDir=${sortField=='order.totalAmount' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               order=${orderFilter},
+                               filterType=${filterType}
+                               )}">
+                    Total Amount
+                </a>
+                <span th:text="${sortField=='order.totalAmount' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
+
+            <th style="width: 10%">
+                <a th:href="@{/orders(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='order.orderDate',
+                               sortDir=${sortField=='order.orderDate' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               order=${orderFilter},
+                               filterType=${filterType}
+                               )}">
+                    Order Date
+                </a>
+                <span th:text="${sortField=='order.orderDate' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orderPage.content}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.product.brand.brandName} + ' - ' + ${order.product.name}"></td>
+            <td th:text="'$' + ${#numbers.formatDecimal(order.product.price,1,2)}"></td>
+            <td th:text="${order.quantity}"></td>
+            <td th:text="'$' + ${#numbers.formatDecimal(order.totalAmount,1,2)}"></td>
+            <td th:text="${#temporals.format(order.orderDate,'MMM dd, yyyy HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav th:if="${totalPages > 1}">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${currentPage==0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/orders(page=${currentPage-1},size=${size},sortField=${sortField},sortDir=${sortDir},order=${orderFilter},filterType=${filterType})}">
+                    Previous
+                </a>
+            </li>
+
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages-1)}"
+                th:classappend="${i==currentPage}? 'active'">
+                <a class="page-link"
+                   th:href="@{/orders(page=${i},size=${size},sortField=${sortField},sortDir=${sortDir},order=${orderFilter},filterType=${filterType})}"
+                   th:text="${i+1}"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${currentPage+1>=totalPages}? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/orders(page=${currentPage+1},size=${size},sortField=${sortField},sortDir=${sortDir},order=${orderFilter},filterType=${filterType})}">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
 
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#ordersTable').DataTable({
-            paging: true,
-            searching: true,
-            ordering: true
-        });
-    });
-</script>
-
 </body>
 </html>

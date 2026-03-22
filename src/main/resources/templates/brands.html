@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http:www.thymeleaf.org/extra/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Brands</title>
@@ -13,31 +13,45 @@
     <h1 class="mb-3">Brands</h1>
     <p class="text-muted mb-3">Popular technology brands currently included in the warehouse system.</p>
 
-    <a th:href="@{/brands/new}" class="btn btn-success mb-3">Add Brand</a>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/brands/new}" class="btn btn-success mb-3">Add Brand</a>
 
     <!-- Filter -->
     <form method="get" th:action="@{/brands}" class="row g-3 mb-3">
-        <div class="col-md-3">
+        <div class="col-md-3" style="max-width: 350px;">
             <input type="text" name="brand" th:value="${brandFilter}" class="form-control"
                    placeholder="Search Brand Name">
         </div>
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary">Filter</button>
-            <a th:href="@{/brands}" class="btn btn-secondary">Reset</a>
+        <div class="col-md-3" style="max-width: 150px;">
+            <!--<button type="submit" class="btn btn-primary">Search Brands</button>-->
+            <a th:href="@{/brands}" class="btn btn-secondary">Reset Filters</a>
         </div>
+
+        <!-- Row Count per page -->
+        <div class="col-md-3" style="max-width: 150px;">
+            <label for="size-select" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">Per
+                Page</label>
+            <select id="size-select" name="size" onchange="this.form.submit();"
+                    style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="10" th:selected="${size == 10}">10</option>
+                <option value="25" th:selected="${size == 25}">25</option>
+                <option value="50" th:selected="${size == 50}">50</option>
+                <option value="100" th:selected="${size == 100}">100</option>
+            </select>
+        </div>
+
     </form>
 
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
             <th>
-                <a th:href="@{/brands(page=${currentPage},size=10,sortField='id',sortDir=${sortField=='id' && sortDir=='asc'?'desc':'asc'},brand=${brandFilter})}">
-                    ID <span th:text="${sortField=='id'? (sortDir=='asc'?'↑':'↓') : ''}"></span>
+                <a th:href="@{/brands(page=${currentPage},size=${size},sortField='id',sortDir=${sortField=='id' && sortDir=='DESC'?'ASC':'DESC'},brand=${brandFilter})}">
+                    ID <span th:text="${sortField=='id'? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
                 </a>
             </th>
             <th>
-                <a th:href="@{/brands(page=${currentPage},size=10,sortField='brandName',sortDir=${sortField=='brandName' && sortDir=='asc'?'desc':'asc'},brand=${brandFilter})}">
-                    Brand <span th:text="${sortField=='brandName'? (sortDir=='asc'?'↑':'↓') : ''}"></span>
+                <a th:href="@{/brands(page=${currentPage},size=${size},sortField='brandName',sortDir=${sortField=='brandName' && sortDir=='DESC'?'ASC':'DESC'},brand=${brandFilter})}">
+                    Brand <span th:text="${sortField=='brandName'? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
                 </a>
             </th>
         </tr>
@@ -55,17 +69,17 @@
         <ul class="pagination">
             <li class="page-item" th:classappend="${currentPage==0}? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/brands(page=${currentPage-1},size=10,sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}">Previous</a>
+                   th:href="@{/brands(page=${currentPage-1},size=${size},sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}">Previous</a>
             </li>
             <li class="page-item" th:each="i : ${#numbers.sequence(0,totalPages-1)}"
                 th:classappend="${i==currentPage}? 'active'">
                 <a class="page-link"
-                   th:href="@{/brands(page=${i},size=10,sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}"
+                   th:href="@{/brands(page=${i},size=${size},sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}"
                    th:text="${i+1}"></a>
             </li>
             <li class="page-item" th:classappend="${currentPage+1>=totalPages}? 'disabled'">
                 <a class="page-link"
-                   th:href="@{/brands(page=${currentPage+1},size=10,sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}">Next</a>
+                   th:href="@{/brands(page=${currentPage+1},size=${size},sortField=${sortField},sortDir=${sortDir},brand=${brandFilter})}">Next</a>
             </li>
         </ul>
     </nav>
