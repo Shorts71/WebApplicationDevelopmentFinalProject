@@ -7,17 +7,14 @@
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="app-container">
-    <div class="app-header">
-        <h1>Login Test</h1>
-    </div>
-
+<div class="container mt-4">
+    <h1 class="mb-3">Login</h1>
 
     <div th:if="${param.error}">
         Invalid username or password. Please try again.
     </div>
 
-    <div class="players-card">
+    <div class="players-card" style="max-width: 1280px;">
         <form method="post" action="/login">
             <div class="mb-3">
                 <label for="name" class="form-label">Username:</label>
