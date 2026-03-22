@@ -30,6 +30,12 @@
                     <a class="nav-link" th:href="@{/orders/new}">Create Order</a>
                 </li>
                 <li class="nav-item">
+                    <a sec:authorize="hasRole('ADMIN')" class="nav-link" th:href="@{/users}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a sec:authorize="hasRole('ADMIN')" class="nav-link" th:href="@{/users/new}">Create User</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" th:href="@{/about}">About</a>
                 </li>
                 <li class="nav-item">
