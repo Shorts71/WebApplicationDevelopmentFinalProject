@@ -16,8 +16,14 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Page<User> findByUsernameContainingIgnoreCase(String username, Pageable pageable);
 
     //JPQL
-    @Query("Select u from User u where u.email =: email")
+    @Query("Select u from User u where u.email = :email")
     User findByEmail(@Param("email") String email);
 
     Optional<User> findByUsername(String username);
+
+    @Query("SELECT u FROM User u where u.role = 'STAFF'")
+    public Page<User> findUserByStaffRole(Pageable pageable);
+
+    @Query("SELECT u FROM User u WHERE u.role = 'ADMIN'")
+    public Page<User> findUserByAdminRole(Pageable pageable);
 }
