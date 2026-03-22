@@ -49,13 +49,58 @@ INSERT INTO products (name, price, description, brand_id, stock_count) VALUES ('
 INSERT INTO products (name, price, description, brand_id, stock_count) VALUES ('Glide-Step Altus', 125, 'Skechers newest shoe', 23, 29);
 
 -- Orders
-INSERT INTO orders_table (order_date, total_amount, quantity) VALUES (CURRENT_TIMESTAMP(), 720, 4);
-INSERT INTO orders_table (order_date, total_amount, quantity) VALUES (CURRENT_TIMESTAMP(), 240, 3);
+--INSERT INTO orders_table (order_date, total_amount, quantity) VALUES (CURRENT_TIMESTAMP(), 720, 4);
+--INSERT INTO orders_table (order_date, total_amount, quantity) VALUES (CURRENT_TIMESTAMP(), 240, 3);
+
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 4, p.price * 4, CURRENT_TIMESTAMP from products p WHERE p.id = 12;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 5, p.price * 5, CURRENT_TIMESTAMP from products p WHERE p.id = 23;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 6, p.price * 6, CURRENT_TIMESTAMP from products p WHERE p.id = 2;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 9, p.price * 9, CURRENT_TIMESTAMP from products p WHERE p.id = 5;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 6, p.price * 6, CURRENT_TIMESTAMP from products p WHERE p.id = 13;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 2, p.price * 2, CURRENT_TIMESTAMP from products p WHERE p.id = 20;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 10, p.price * 10, CURRENT_TIMESTAMP from products p WHERE p.id = 15;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 2, p.price * 2, CURRENT_TIMESTAMP from products p WHERE p.id = 9;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 3, p.price * 3, CURRENT_TIMESTAMP from products p WHERE p.id = 17;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 7, p.price * 7, CURRENT_TIMESTAMP from products p WHERE p.id = 22;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 8;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 18;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 12, p.price * 12, CURRENT_TIMESTAMP from products p WHERE p.id = 12;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 5, p.price * 5, CURRENT_TIMESTAMP from products p WHERE p.id = 14;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 11;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 7, p.price * 7, CURRENT_TIMESTAMP from products p WHERE p.id = 3;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 5, p.price * 5, CURRENT_TIMESTAMP from products p WHERE p.id = 13;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 4, p.price * 4, CURRENT_TIMESTAMP from products p WHERE p.id = 7;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 2, p.price * 2, CURRENT_TIMESTAMP from products p WHERE p.id = 14;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 23, p.price * 23, CURRENT_TIMESTAMP from products p WHERE p.id = 23;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 9, p.price * 9, CURRENT_TIMESTAMP from products p WHERE p.id = 9;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 6;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 20;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 12;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 2, p.price * 2, CURRENT_TIMESTAMP from products p WHERE p.id = 4;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 10;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 5, p.price * 5, CURRENT_TIMESTAMP from products p WHERE p.id = 1;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 5, p.price * 5, CURRENT_TIMESTAMP from products p WHERE p.id = 23;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 9, p.price * 9, CURRENT_TIMESTAMP from products p WHERE p.id = 13;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 8, p.price * 8, CURRENT_TIMESTAMP from products p WHERE p.id = 21;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 10, p.price * 10, CURRENT_TIMESTAMP from products p WHERE p.id = 16;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 9, p.price * 9, CURRENT_TIMESTAMP from products p WHERE p.id = 2;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 4, p.price * 4, CURRENT_TIMESTAMP from products p WHERE p.id = 17;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 10, p.price * 10, CURRENT_TIMESTAMP from products p WHERE p.id = 19;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 2, p.price * 2, CURRENT_TIMESTAMP from products p WHERE p.id = 10;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 6, p.price * 6, CURRENT_TIMESTAMP from products p WHERE p.id = 3;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 2, p.price * 2, CURRENT_TIMESTAMP from products p WHERE p.id = 15;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 2, p.price * 2, CURRENT_TIMESTAMP from products p WHERE p.id = 22;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 6, p.price * 6, CURRENT_TIMESTAMP from products p WHERE p.id = 10;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 6, p.price * 6, CURRENT_TIMESTAMP from products p WHERE p.id = 15;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 19, p.price * 19, CURRENT_TIMESTAMP from products p WHERE p.id = 19;
+INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 3, p.price * 3, CURRENT_TIMESTAMP from products p WHERE p.id = 21;
+
+
 
 -- Order Items
-INSERT INTO order_item (order_id, product_id, quantity) VALUES (1, 1, 1);
-INSERT INTO order_item (order_id, product_id, quantity) VALUES (1, 4, 2);
-INSERT INTO order_item (order_id, product_id, quantity) VALUES (1, 7, 1);
-
-INSERT INTO order_item (order_id, product_id, quantity) VALUES (2, 2, 1);
-INSERT INTO order_item (order_id, product_id, quantity) VALUES (2, 5, 2);
+--INSERT INTO order_item (order_id, product_id, quantity) VALUES (1, 1, 1);
+--INSERT INTO order_item (order_id, product_id, quantity) VALUES (1, 4, 2);
+--INSERT INTO order_item (order_id, product_id, quantity) VALUES (1, 7, 1);
+--
+--INSERT INTO order_item (order_id, product_id, quantity) VALUES (2, 2, 1);
+--INSERT INTO order_item (order_id, product_id, quantity) VALUES (2, 5, 2);
