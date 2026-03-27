@@ -24,6 +24,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u where u.role = 'STAFF'")
     public Page<User> findUserByStaffRole(Pageable pageable);
 
+    @Query("SELECT u FROM User u where u.role = 'MANAGER'")
+    public Page<User> findUserByManagerRole(Pageable pageable);
+
     @Query("SELECT u FROM User u WHERE u.role = 'ADMIN'")
     public Page<User> findUserByAdminRole(Pageable pageable);
 }

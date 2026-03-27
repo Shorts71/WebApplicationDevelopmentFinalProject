@@ -19,8 +19,8 @@ public class UserRepo {
     }
 
     public void save(User user) {
-        String sql = "INSERT INTO users (username, email) values (?, ?)";
-        jdbcTemplate.update(sql, user.getUsername(), user.getEmail());
+        String sql = "INSERT INTO users (username, email, role) values (?, ?, ?)";
+        jdbcTemplate.update(sql, user.getUsername(), user.getEmail(), user.getRole());
     }
 
     public List<User> findAll() {
@@ -33,6 +33,7 @@ public class UserRepo {
                 user.setUserId(rs.getLong("user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
 
                 return user;
             }
@@ -51,6 +52,7 @@ public class UserRepo {
                 user.setUserId(rs.getLong("user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
 
                 return user;
             }
