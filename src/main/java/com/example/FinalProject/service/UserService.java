@@ -40,6 +40,10 @@ public class UserService {
         return userRepository.findUserByStaffRole(pageable);
     }
 
+    public Page<User> findUserByManagerRole(Pageable pageable) {
+        return userRepository.findUserByManagerRole(pageable);
+    }
+
     public Page<User> findUserByAdminRole(Pageable pageable) {
         return userRepository.findUserByAdminRole(pageable);
     }
