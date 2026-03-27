@@ -23,8 +23,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register", "/login").permitAll()
-                        .requestMatchers("/h2-console/**").hasRole("ADMIN")
-                        .requestMatchers("/create-user").hasRole("ADMIN")
+                        .requestMatchers("/users/**").hasRole("ADMIN")
+                        .requestMatchers("/products/**", "/brands/**").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers("/orders/**").hasAnyRole("ADMIN", "STAFF")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
