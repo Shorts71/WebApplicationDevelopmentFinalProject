@@ -45,8 +45,9 @@
             <select id="filter-select" name="filterType" onchange="this.form.submit();"
                     style="width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px;">
                 <option value="all" th:selected="${filterType == 'all'}">All Users</option>
-                <option value="staff" th:selected="${filterType == 'staff'}">Staff</option>
-                <option value="admin" th:selected="${filterType == 'admin'}">Admin</option>
+                <option value="STAFF" th:selected="${filterType == 'STAFF'}">Staff</option>
+                <option value="MANAGER" th:selected="${filterType == 'MANAGER'}">Manager</option>
+                <option value="ADMIN" th:selected="${filterType == 'ADMIN'}">Admin</option>
             </select>
         </div>
 
@@ -85,7 +86,7 @@
                 <span th:text="${sortField=='userId' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
 
-            <th style="width: 10%">
+            <th style="width: 30%">
                 <a th:href="@{/users(
                                page=${currentPage},
                                size=${size},
@@ -99,7 +100,7 @@
                 <span th:text="${sortField=='username' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
 
-            <th style="width: 10%">
+            <th style="width: 30%">
                 <a th:href="@{/users(
                                page=${currentPage},
                                size=${size},
@@ -112,6 +113,19 @@
                 </a>
                 <span th:text="${sortField=='email' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
+            <th style="width: 30%">
+                <a th:href="@{/users(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='role',
+                               sortDir=${sortField=='role' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               username=${username},
+                               filterType=${filterType}
+                               )}">
+                    Role
+                </a>
+                <span th:text="${sortField=='role' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -119,6 +133,7 @@
             <td th:text="${user.userId}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.email}"></td>
+            <td th:text="${user.role}"></td>
         </tr>
         </tbody>
     </table>

@@ -74,42 +74,56 @@
                 <a th:href="@{/orders(
                                page=${currentPage},
                                size=${size},
-                               sortField='order',
-                               sortDir=${sortField=='order' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               sortField='id',
+                               sortDir=${sortField=='id' && sortDir=='ASC' ? 'DESC' : 'ASC'},
                                order=${orderFilter},
                                filterType=${filterType}
                                )}">
                     ID
                 </a>
-                <span th:text="${sortField=='order' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+                <span th:text="${sortField=='id' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
 
-            <th style="width: 10%">
+            <th style="width: 20%">
                 <a th:href="@{/orders(
                                page=${currentPage},
                                size=${size},
-                               sortField='order.items',
-                               sortDir=${sortField=='order.items' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               sortField='product.brand.brandName',
+                               sortDir=${sortField=='product.brand.brandName' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               order=${orderFilter},
+                               filterType=${filterType}
+                               )}">
+                    Brand
+                </a>
+                <span th:text="${sortField=='product.brand.brandName' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+            </th>
+
+            <th style="width: 20%">
+                <a th:href="@{/orders(
+                               page=${currentPage},
+                               size=${size},
+                               sortField='product.name',
+                               sortDir=${sortField=='product.name' && sortDir=='ASC' ? 'DESC' : 'ASC'},
                                order=${orderFilter},
                                filterType=${filterType}
                                )}">
                     Product
                 </a>
-                <span th:text="${sortField=='order.items' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+                <span th:text="${sortField=='product.name' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
 
-            <th style="width: 10%">
+            <th style="width: 20%">
                 <a th:href="@{/orders(
                                page=${currentPage},
                                size=${size},
-                               sortField='order.product.price',
-                               sortDir=${sortField=='order.product.price' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               sortField='product.price',
+                               sortDir=${sortField=='product.price' && sortDir=='ASC' ? 'DESC' : 'ASC'},
                                order=${orderFilter},
                                filterType=${filterType}
                                )}">
                     Price
                 </a>
-                <span th:text="${sortField=='order.product.price' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+                <span th:text="${sortField=='product.price' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
 
             <th style="width: 10%">
@@ -126,39 +140,40 @@
                 <span th:text="${sortField=='quantity' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
 
-            <th style="width: 10%">
+            <th style="width: 20%">
                 <a th:href="@{/orders(
                                page=${currentPage},
                                size=${size},
-                               sortField='order.totalAmount',
-                               sortDir=${sortField=='order.totalAmount' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               sortField='totalAmount',
+                               sortDir=${sortField=='totalAmount' && sortDir=='ASC' ? 'DESC' : 'ASC'},
                                order=${orderFilter},
                                filterType=${filterType}
                                )}">
                     Total Amount
                 </a>
-                <span th:text="${sortField=='order.totalAmount' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+                <span th:text="${sortField=='totalAmount' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
 
-            <th style="width: 10%">
+            <th style="width: 20%">
                 <a th:href="@{/orders(
                                page=${currentPage},
                                size=${size},
-                               sortField='order.orderDate',
-                               sortDir=${sortField=='order.orderDate' && sortDir=='ASC' ? 'DESC' : 'ASC'},
+                               sortField='orderDate',
+                               sortDir=${sortField=='orderDate' && sortDir=='ASC' ? 'DESC' : 'ASC'},
                                order=${orderFilter},
                                filterType=${filterType}
                                )}">
                     Order Date
                 </a>
-                <span th:text="${sortField=='order.orderDate' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
+                <span th:text="${sortField=='orderDate' ? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
             </th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="order : ${orderPage.content}">
             <td th:text="${order.id}"></td>
-            <td th:text="${order.product.brand.brandName} + ' - ' + ${order.product.name}"></td>
+            <td th:text="${order.product.brand.brandName}"></td>
+            <td th:text="${order.product.name}"></td>
             <td th:text="'$' + ${#numbers.formatDecimal(order.product.price,1,2)}"></td>
             <td th:text="${order.quantity}"></td>
             <td th:text="'$' + ${#numbers.formatDecimal(order.totalAmount,1,2)}"></td>

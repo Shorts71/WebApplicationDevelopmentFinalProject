@@ -18,12 +18,10 @@
     <!-- Filter -->
     <form method="get" th:action="@{/brands}" class="row g-3 mb-3">
         <div class="col-md-3" style="max-width: 350px;">
+            <label for="size-select" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">
+                Brand Name</label>
             <input type="text" name="brand" th:value="${brandFilter}" class="form-control"
                    placeholder="Search Brand Name">
-        </div>
-        <div class="col-md-3" style="max-width: 150px;">
-            <!--<button type="submit" class="btn btn-primary">Search Brands</button>-->
-            <a th:href="@{/brands}" class="btn btn-secondary">Reset Filters</a>
         </div>
 
         <!-- Row Count per page -->
@@ -39,17 +37,22 @@
             </select>
         </div>
 
+        <div class="col-md-3" style="max-width: 150px;">
+            <button type="submit" class="btn btn-primary">Search Brands</button>
+            <a th:href="@{/brands}" class="btn btn-secondary">Reset Filters</a>
+        </div>
+
     </form>
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" style="table-layout: fixed;">
         <thead>
         <tr>
-            <th>
+            <th style="width: 10%">
                 <a th:href="@{/brands(page=${currentPage},size=${size},sortField='id',sortDir=${sortField=='id' && sortDir=='DESC'?'ASC':'DESC'},brand=${brandFilter})}">
                     ID <span th:text="${sortField=='id'? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
                 </a>
             </th>
-            <th>
+            <th style="width: 90%">
                 <a th:href="@{/brands(page=${currentPage},size=${size},sortField='brandName',sortDir=${sortField=='brandName' && sortDir=='DESC'?'ASC':'DESC'},brand=${brandFilter})}">
                     Brand <span th:text="${sortField=='brandName'? (sortDir=='DESC' ? '↓' : '↑') : ''}"></span>
                 </a>
