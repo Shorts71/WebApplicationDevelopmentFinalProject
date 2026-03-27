@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
@@ -83,6 +85,9 @@ public class OrderController {
 
         Long productId = order.getProduct().getId();
         order.setProduct(productService.getProductById(productId));
+        order.setQuantity(order.getQuantity());
+        order.setTotalAmount(order.getQuantity() * order.getProduct().getPrice());
+        order.setOrderDate(LocalDateTime.now());
 
         orderService.addOrder(order);
 
