@@ -42,7 +42,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(nullable = true)
-    private String role = "STAFF";
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -51,8 +51,9 @@ public class UsersController {
             userPage = userService.findUserByName(username, pageable);
         } else {
             userPage = switch (filterType) {
-                case "staff" -> userService.findUserByStaffRole(pageable);
-                case "admin" -> userService.findUserByAdminRole(pageable);
+                case "STAFF" -> userService.findUserByStaffRole(pageable);
+                case "ADMIN" -> userService.findUserByAdminRole(pageable);
+                case "MANAGER" -> userService.findUserByManagerRole(pageable);
                 default -> userService.getAllUsersPageable(pageable);
             };
         }
@@ -64,8 +65,9 @@ public class UsersController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", userPage.getTotalPages());
         model.addAttribute("search", username);
-        model.addAttribute("sort", sortField);
-        model.addAttribute("direction", sortDir);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("filterType", filterType);
         model.addAttribute("hasPrevious", userPage.hasPrevious());
         model.addAttribute("hasNext", userPage.hasNext());
         model.addAttribute("startIndex", page * size + 1);
@@ -90,11 +92,13 @@ public class UsersController {
 
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             model.addAttribute("error", "Username already exists");
-            return "user-form";
+            return "redirect:/user-form?error";
         }
 
+        user.setUsername(user.getUsername());
+        user.setEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("STAFF");
+        user.setRole(user.getRole());
 
         userRepository.save(user);
         return "redirect:/users";
