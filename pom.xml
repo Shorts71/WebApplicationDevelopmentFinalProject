@@ -19,7 +19,7 @@
     <description>Final Project for Web Application Development</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>
@@ -83,7 +83,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <release>25</release>
+                    <release>24</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
