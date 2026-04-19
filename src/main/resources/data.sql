@@ -49,8 +49,6 @@ INSERT INTO products (name, price, description, brand_id, stock_count) VALUES ('
 INSERT INTO products (name, price, description, brand_id, stock_count) VALUES ('Glide-Step Altus', 125, 'Skechers newest shoe', 23, 29);
 
 -- Orders
---INSERT INTO orders_table (order_date, total_amount, quantity) VALUES (CURRENT_TIMESTAMP(), 720, 4);
---INSERT INTO orders_table (order_date, total_amount, quantity) VALUES (CURRENT_TIMESTAMP(), 240, 3);
 
 INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 4, p.price * 4, CURRENT_TIMESTAMP from products p WHERE p.id = 12;
 INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 5, p.price * 5, CURRENT_TIMESTAMP from products p WHERE p.id = 23;
@@ -94,8 +92,6 @@ INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT
 INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 6, p.price * 6, CURRENT_TIMESTAMP from products p WHERE p.id = 15;
 INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 19, p.price * 19, CURRENT_TIMESTAMP from products p WHERE p.id = 19;
 INSERT INTO orders_table (product_id, quantity, total_amount, order_date) SELECT p.id, 3, p.price * 3, CURRENT_TIMESTAMP from products p WHERE p.id = 21;
-
-
 
 -- Order Items
 --INSERT INTO order_item (order_id, product_id, quantity) VALUES (1, 1, 1);
